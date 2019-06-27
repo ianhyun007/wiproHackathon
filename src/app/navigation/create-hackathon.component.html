@@ -1,0 +1,58 @@
+<!-- <mat-card style="background-color:#C9FCF9"> -->
+  <mat-card [ngStyle]="setBgColor()">
+    <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center center">
+      <h1>{{newUpdate}} HACKATHON</h1>
+      <p>Choose a short and catchy title that is also descriptive of the event. (ie. "Hack the Office") then give 
+        detailed information about the Hackathon</p>
+    </div><br><br>
+    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (submit)="onAddPost()">
+      <mat-form-field>
+        <input matInput type="text" formControlName="title" name="title" placeholder="Post Title">
+        <mat-error *ngIf="form.get('title').invalid">Please Enter a Hackathon Title</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput rows="6" formControlName="content" name="content" placeholder="Post Content"></textarea>
+        <mat-error *ngIf="form.get('content').invalid">Please Enter a Hackathon Content</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Hackathon Date" formControlName="hackdate" [matDatepicker]="picker" [min]="maxDate" name="hackdate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div *ngIf="mode==='create'">
+        <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+        <input type="file" #filePicker (change)="onImagePicked($event)">
+      </div><br><br>
+     <button *ngIf="mode==='create'"
+        mat-raised-button
+        color="accent"
+        type="submit" [disabled]="form.invalid">Save Hackathon</button>
+      <button *ngIf="mode==='update'"
+        mat-raised-button
+        color="accent"
+        type="submit">Update Hackathon</button>  
+    </form>
+    <!-- <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" (submit)="onAddPost(pf)" #pf="ngForm">
+      <mat-form-field>
+        <input matInput type="text" ngModel name="title" required minlength="3" #title="ngModel" placeholder="Post Title" [(ngModel)]="hTitle">
+        <mat-error *ngIf="title.invalid">Please Enter a Hackathon Title</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput rows="6" ngModel name="content" required #content="ngModel"  placeholder="Post Content" [(ngModel)]="hContent"></textarea>
+        <mat-error *ngIf="content.invalid">Please Enter a Hackathon Content</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Hackathon Date" [matDatepicker]="picker" [min]="maxDate" ngModel required name="hackdate" [(ngModel)]="hDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field><br><br>
+      <button *ngIf="mode==='create'"
+        mat-raised-button
+        color="accent"
+        type="submit" [disabled]="pf.invalid">Save Hackathon</button>
+      <button *ngIf="mode==='update'"
+        mat-raised-button
+        color="accent"
+        type="submit">Update Hackathon</button>  
+    </form> -->
+  </mat-card>

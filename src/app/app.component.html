@@ -1,0 +1,12 @@
+<mat-sidenav-container class="example-container">
+  <!-- <mat-sidenav mode="side" opened>Start</mat-sidenav> -->
+  <mat-sidenav #sideNav>
+      <app-sidenav-list (closeSidenav)="sideNav.close()"></app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header  (sidenavToggle)="sideNav.toggle()"></app-header>
+    <Main>
+      <router-outlet></router-outlet>
+    </Main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

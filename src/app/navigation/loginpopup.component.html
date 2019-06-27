@@ -1,0 +1,120 @@
+<div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center center">
+  <h1>LOGIN</h1>
+  <p>Already have an account? 
+      log-in to join or create hackathons</p>
+</div><br>
+<mat-horizontal-stepper [linear] = "isLinear" #stepper>
+  <mat-step [stepControl] = "firstFormGroup">
+     <form [formGroup] = "firstFormGroup">
+        <ng-template matStepLabel>EMAIL</ng-template>
+        <mat-form-field>
+           <input matInput placeholder = "Enter your email" formControlName = "firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <!-- <button mat-raised-button matStepperNext>Next</button> -->
+          <button mat-raised-button matStepperNext>
+            <mat-icon>forward</mat-icon>
+          </button>
+        </div>
+     </form>
+  </mat-step>
+  <mat-step [stepControl] = "secondFormGroup">
+    <form [formGroup] = "secondFormGroup">
+       <ng-template matStepLabel>PASSWORD</ng-template>
+       <mat-form-field>
+         <input type="password" matInput placeholder = "Enter password" formControlName = "secondCtrl" required>
+       </mat-form-field>
+       <div>
+         <!-- <button mat-stroked-button matStepperPrevious>Back</button>
+         <button mat-stroked-button matStepperNext>Next</button> -->
+          <button mat-stroked-button matStepperPrevious>
+            <mat-icon>undo</mat-icon>
+          </button> 
+          <button mat-stroked-button matStepperNext>
+            <mat-icon>redo</mat-icon>
+          </button>
+       </div> 
+    </form>
+ </mat-step>
+ <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+       Details taken.
+    <div style="margin-top:20px">
+       <!-- <button mat-raised-button matStepperPrevious>Back</button>
+       <button mat-button (click) = "stepper.reset()">Reset</button> -->
+       <button mat-raised-button matStepperPrevious>
+        <mat-icon>arrow_left</mat-icon>
+      </button>
+      <button mat-raised-button (click)="onSubmit()">
+        <mat-icon>done_all</mat-icon>
+      </button>
+    </div>
+ </mat-step>
+</mat-horizontal-stepper>
+
+
+
+
+<!-- <section>
+  <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center center">
+    <h1>LOGIN</h1>
+    <p>Already have an account? 
+        log-in to join or create hackathons</p>
+  </div><br>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field>
+        <input
+          type="email"
+          matInput
+          placeholder="Your email"
+          formControlName="email">
+      <mat-hint>Please enter a valid email.</mat-hint>
+      <mat-error>Invalid or missing email.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        placeholder="Your password"
+        formControlName="password">   
+      <mat-hint>Please enter your password.</mat-hint>
+      <mat-error>Missing password.</mat-error>
+    </mat-form-field><br>
+    <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+  </form>
+</section> -->
+    <!-- <form
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input
+          type="email"
+          matInput
+          placeholder="Your email"
+          formControlName="email">
+        <mat-hint>Please enter a valid email.</mat-hint>
+        <mat-error>Invalid or missing email.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="password"
+          matInput
+          placeholder="Your password"
+          formControlName="password">   
+        <mat-hint>Please enter your password.</mat-hint>
+        <mat-error>Missing password.</mat-error>
+      </mat-form-field>
+      <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+      <mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
+    </form> -->
+  
