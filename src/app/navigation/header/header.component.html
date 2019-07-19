@@ -4,20 +4,25 @@
         <mat-icon>menu</mat-icon>
     </button>
   </div>
-  <div><img style="vertical-align:middle;width:6rem;height:3rem" src="./../../../assets/logo.png"/></div>
+  <div><img style="vertical-align:middle;width:6rem;height:3rem;margin-right:1rem;" src="./../../../assets/logo.png"/></div>
+  <div (click)="customerService(1)"><img style="vertical-align:middle;width:6rem;height:3rem" src="./../../../assets/cs.jpg"/></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
       <ul fxLayout fxLayoutGap="50px" class="navigation-items">
         <li *ngIf="!isAuth"><button mat-raised-button (click)="onSignUp()">Signup</button></li>  
         <li *ngIf="!isAuth"><button mat-raised-button (click)="onLogIn()">Login</button>
-        <!-- <li *ngIf="!isAuth"><a routerLink="/signup">Signup</a></li>
-        <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li> -->
         <li *ngIf="isAuth" style="border: 1px solid #4dcfd3;border-radius:10px;background-color: #4dcfd3;">
           <a style="color:white;font-weight: bold" (click)="onHackCreate()">Publish a Hackthon</a>
         </li>
-        <!-- <li *ngIf="isAuth" hidden><a routerLink="/training">Archive</a></li> -->
         <li *ngIf="isAuth">
           <button mat-raised-button (click)="onLogout()">Logout</button>
         </li>
       </ul>
   </div>
 </mat-toolbar>
+
+<div id='draggable' style="position:absolute;z-index:90;text-align: center">
+  <!-- <mat-icon style="position:absolute" (click)="hideVideoChat()" *ngIf="showCloseBut">
+    close
+  </mat-icon> -->
+  <video #myVideo autoplay style="width:16rem;height:16rem;" ></video>
+</div>

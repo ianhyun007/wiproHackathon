@@ -1,0 +1,78 @@
+<!-- <mat-card *ngIf="butToggleVal==='todays'" style=" background-color: black; color:white;"> -->
+  <mat-card @itemState3 *ngIf='isCurUp' style=" background-color: black; color:white;margin: 0 auto;width: 70%;">
+    <h1 style="text-align: center">{{chartTitle}}</h1>
+    <mat-accordion multi="true" *ngIf="posts.length > 0">
+      <mat-expansion-panel *ngFor="let post of posts">
+        <mat-expansion-panel-header>
+          {{ post.title }}
+        </mat-expansion-panel-header>
+          <p>Hackathon Date : {{ post.startDate | date}}</p>
+          <p>{{ post.content }}</p>
+        <mat-action-row>
+          <button mat-button color="primary"(click)="onEdit(post)">EDIT</button>
+          <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+        </mat-action-row>
+        <div class="post-image">
+          <img [src]="post.imagePath" [alt]="post.title">
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+  <mat-card @itemState2 *ngIf='isComUp' style=" background-color: black; color:white;margin: 0 auto;width: 70%;">
+    <h1 style="text-align: center">{{chartTitle}}</h1>
+    <mat-accordion multi="true" *ngIf="posts.length > 0">
+      <mat-expansion-panel *ngFor="let post of posts">
+        <mat-expansion-panel-header>
+          {{ post.title }}
+        </mat-expansion-panel-header>
+          <p>Hackathon Date : {{ post.startDate | date}}</p>
+          <p>{{ post.content }}</p>
+        <mat-action-row>
+          <button mat-button color="primary"(click)="onEdit(post)">EDIT</button>
+          <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+        </mat-action-row>
+        <div class="post-image">
+          <img [src]="post.imagePath" [alt]="post.title">
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+  <!-- <ng-template #isArc> -->
+  <div @itemState *ngIf='isArcUp' style="text-align: center">
+    <div style="background-color: lightgray;margin: 0 auto;width: 70%;" fxLayout="column" fxLayoutAlign="center center">
+      <h1 style="text-align: center;vertical-align: middle">Archived Hackathon List</h1>
+      <div >
+        <mat-form-field feFlex="50%" style="margin: 0 auto;">
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="filter the list">
+        </mat-form-field>
+      </div>
+      <mat-table [dataSource]="dataSource" matSort style="width:95%;margin: 0 auto;">
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Hackathon Title</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="content">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Hackathon Content</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.content }}</mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="startDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Hackathon Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.startDate | date}}</mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <div style="height:15px;background-color: lightgray"></div>
+    </div>
+    <div>
+      <mat-paginator #paginator 
+        [pageSize]="10"
+        [pageSizeOptions]="[2, 5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
+  <!-- </ng-template> -->
+ 

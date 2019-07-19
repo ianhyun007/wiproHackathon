@@ -4,10 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginpopupComponent } from './navigation/loginpopup.component';
 import { SigninpopupComponent } from './navigation/signinpopup.component';
 
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeModule } from './welcome/welcome.module';
+// import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent},
+  { path: '', pathMatch:'prefix', redirectTo: 'wel/charts'},
+  { path: 'wel', loadChildren: () => WelcomeModule },
   { path: 'signup', component: SigninpopupComponent },
   { path: 'login', component: LoginpopupComponent },
 ];

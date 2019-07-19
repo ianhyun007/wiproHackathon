@@ -11,13 +11,14 @@ import { UIService } from '../shared/ui.service';
 // import * as fromRoot from '../app.reducer';
 // import * as UI from '../shared/ui.actions';
 // import * as Auth from './auth.actions';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthService {
     private isAuthenticted: boolean;
     authChange = new Subject<boolean>();
     
-    constructor(private router: Router, private afAuth: AngularFireAuth, private uiService: UIService,
+    constructor(private router: Router, private afAuth: AngularFireAuth, private uiService: UIService, private store: Store<any>,
         // private trainingService: TrainingService, private matSnackBar: MatSnackBar,
         // private store: Store<{ ui: fromRoot.State }>
     ) {}
@@ -49,6 +50,7 @@ export class AuthService {
                 // this.uiService.loadingStateChanged.next(false);
                 // this.store.dispatch({ type: 'STOP_LOADING' });
                 // this.store.dispatch(new UI.StopLoading());
+                this.store.dispatch({ type: 'userLoggedIn' })
             })
             .catch(error => {
             //    this.uiService.loadingStateChanged.next(false);
@@ -69,6 +71,7 @@ export class AuthService {
                 this.uiService.loadingStateChanged.next(false);
                 // this.store.dispatch({ type: 'STOP_LOADING' });
                 // this.store.dispatch(new UI.StopLoading());
+                this.store.dispatch({ type: 'userLoggedIn' })
             })
             .catch(error => {
                 console.log("FAILED!!")
@@ -81,6 +84,7 @@ export class AuthService {
 
     logout() {
         this.afAuth.auth.signOut();
+        this.store.dispatch({ type: 'userLoggedOut' })
     }
 
     isAuth() {

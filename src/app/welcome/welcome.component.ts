@@ -1,12 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { UIService } from '../shared/ui.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../auth/auth.service';
 import { MatDialog } from '@angular/material';
 import { PostsService } from '../posts/posts.service';
 import { Post } from '../posts/post.model';
 import { CreateHackathonComponent } from '../navigation/create-hackathon.component';
+import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { Store, select } from '@ngrx/store';
+import { User } from './../auth/user.model';
+// import { AppState } from './../app.state';
+import * as LoginActions from './../actions/login.actions';
 
 @Component({
   selector: 'app-welcome',
@@ -25,38 +32,30 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  butBgCol1: string = '#000';
-  butBgCol2: string = '#FFF';
-  butBgCol3: string = '#FFF';
-  // butBgCol2: string = '#DEFAF8';
-  // butBgCol3: string = 'lightgray';
-
-  butFtCol1: string = '#FFF';
-  butFtCol2: string = '#000';
-  butFtCol3: string = '#000';
-
-
+  user: Observable<User>;
+  spinner$: Observable<boolean>;
+  
   constructor(private uiService: UIService, private authService: AuthService, 
-    private dialog: MatDialog, private postsService: PostsService) {} 
+    private dialog: MatDialog, private postsService: PostsService, private router: Router,
+    private store: Store<any>) {
+    } 
     
   ngOnInit() {
+    this.spinner$ = this.store.pipe(select(state => state.spinner.isOn));
+
     this.authSubscription = this.authService.authChange.subscribe(authStatus => {
       if(authStatus) {
         this.isAuth = false;
+        this.store.dispatch({ type: 'userLoggedIn' })
       } else {
         this.isAuth = true;
+        
       } 
+
+      let test = 'wel/charts/:todays';
+      this.router.navigate([test]);
     });
 
-    this.postsService.getWhichPosts('todays');
-
-    // this.postsService.getPosts();
-    this.postsSub = this.postsService.getPostUpdateListener()
-      .subscribe((posts: Post[]) => {
-        this.posts = posts;
-        this.dataSource.data = posts;
-        this.dataSource.sort = this.sort;
-      });
   }
 
   blockAuthMsg() {
@@ -64,29 +63,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   onValChange(val: string) {
-    this.butToggleVal = val;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-
-    if(val === 'todays') {
-      this.butBgCol1 = '#000';  
-      this.butBgCol2 = '#FFF';
-      this.butBgCol3 = '#FFF';
-      this.butFtCol1 = '#FFF';
-      this.postsService.getWhichPosts('todays');
-    } else if(val === 'upcoming') {
-      this.butBgCol2 = '#DEFAF8';
-      this.butBgCol1 = '#FFF';  
-      this.butBgCol3 = '#FFF';
-      this.butFtCol1 = '#000';
-      this.postsService.getWhichPosts('upcoming');
-    } else {
-      this.butBgCol3 = 'lightgray';
-      this.butBgCol1 = '#FFF';  
-      this.butBgCol2 = '#FFF';
-      this.butFtCol1 = '#000';
-      this.postsService.getWhichPosts('archived');
-    }
+    let test = 'wel/charts/:'+val;
+    this.router.navigate([test]);
   }
 
   doFilter(filterValue: string) {
@@ -97,10 +75,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.postsService.deletePost(postId);
   }
 
-  // onEdit(postId: string, postTitle: string, postContent: string, postStartDate: Date) {
   onEdit(post: Post) {
     const dialogRef = this.dialog.open(CreateHackathonComponent,
-      // {data: {id:post.id, title:post.title, content:post.content, sDate:post.startDate}});
       {data: {post:post}});
   }
 
@@ -110,7 +86,6 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.postsSub.unsubscribe();
     this.authSubscription.unsubscribe();
   }
 }

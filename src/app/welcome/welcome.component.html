@@ -1,14 +1,23 @@
-<div *ngIf="isAuth" class="authBlocker" (click)="blockAuthMsg()"></div>
+<div *ngIf="spinner$ | async" class="authBlocker" (click)="blockAuthMsg()"></div>
 <!-- <div *ngIf="butToggleVal==='upcoming' || butToggleVal==='todays'" > -->
-<hr style="height:80px;border:none">
-<div style="text-align: center">
-  <mat-button-toggle-group #group="matButtonToggleGroup" [value]="butToggleVal" (change)="onValChange(group.value)">
-    <mat-button-toggle value="todays" style="font-weight: bolder" [ngStyle]="{'background-color': butBgCol1, 'color': butFtCol1}">Today's</mat-button-toggle>
+
+ <hr style="height:80px;border:none">
+ <div style="text-align: center;">
+    <!-- <mat-button-toggle value="todays" style="font-weight: bolder" [ngStyle]="{'background-color': butBgCol1, 'color': butFtCol1}">Today's</mat-button-toggle>
     <mat-button-toggle value="upcoming" style="font-weight: bolder" [ngStyle]="{'background-color': butBgCol2, 'color': butFtCol2}">Upcoming</mat-button-toggle>
-    <mat-button-toggle value="archived" style="font-weight: bolder" [ngStyle]="{'background-color': butBgCol3, 'color': butFtCol3}">Archived</mat-button-toggle>
+    <mat-button-toggle value="archived" style="font-weight: bolder" [ngStyle]="{'background-color': butBgCol3, 'color': butFtCol3}">Archived</mat-button-toggle> -->
+  <mat-button-toggle-group #group="matButtonToggleGroup" [value]="butToggleVal" (change)="onValChange(group.value)">
+    <mat-button-toggle value="todays" style="font-weight: bolder">Today's</mat-button-toggle>
+    <mat-button-toggle value="upcoming" style="font-weight: bolder">Upcoming</mat-button-toggle>
+    <mat-button-toggle value="archived" style="font-weight: bolder">Archived</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
-<hr style="height:20px;border:none">
+<!-- <div *ngIf="spinner$ | async">loading..</div> -->
+
+<hr style="height:20px;border:none"> 
+
+<router-outlet></router-outlet>
+<!-- 
 <mat-card *ngIf="butToggleVal==='upcoming'" style=" background-color:#DEFAF8;">
   <h1 style="text-align: center">Upcoming Hackathon List</h1>
   <mat-accordion multi="true" *ngIf="posts.length > 0">
@@ -27,8 +36,8 @@
       </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
-</mat-card>
-<mat-card *ngIf="butToggleVal==='todays'" style=" background-color: black; color:white;">
+</mat-card> -->
+<!-- <mat-card *ngIf="butToggleVal==='todays'" style=" background-color: black; color:white;">
   <h1 style="text-align: center">Ongoing Hackathon List</h1>
   <mat-accordion multi="true" *ngIf="posts.length > 0">
     <mat-expansion-panel *ngFor="let post of posts">
@@ -46,24 +55,9 @@
       </div>
       </mat-expansion-panel>
     </mat-accordion>
-</mat-card>
-<!-- <div *ngIf="butToggleVal==='upcoming' || butToggleVal==='todays'">
-  <mat-paginator #paginatorPre 
-    [pageSize]="10"
-    [pageSizeOptions]="[2, 5, 10, 20]">
-  </mat-paginator>
-</div>  -->
+</mat-card> -->
 
-<!-- <mat-card  *ngIf="butToggleVal==='archived'"style=" background-color:lightgrey; color:black;"> -->
-<div [hidden]="butToggleVal!=='archived'" style="text-align: center">
-  <!-- <br><br><br><br>
-  <div>
-    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="butToggleVal" (change)="onValChange(group.value)">
-      <mat-button-toggle value="todays" style="font-weight: bolder">Today's</mat-button-toggle>
-      <mat-button-toggle value="upcoming" style="font-weight: bolder">Upcoming</mat-button-toggle>
-      <mat-button-toggle value="archived" style="font-weight: bolder">Archived</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div><br><br><br><br><br> -->
+<!-- <div [hidden]="butToggleVal!=='archived'" style="text-align: center">
   <div style="background-color: lightgray" fxLayout="column" fxLayoutAlign="center center">
     <h1 style="text-align: center;vertical-align: middle">Archived Hackathon List</h1>
     <div >
@@ -98,7 +92,29 @@
       [pageSizeOptions]="[2, 5, 10, 20]">
     </mat-paginator>
   </div>  
-</div>
+</div> -->
+
+
+
+
+
+<!-- <div *ngIf="butToggleVal==='upcoming' || butToggleVal==='todays'">
+  <mat-paginator #paginatorPre 
+    [pageSize]="10"
+    [pageSizeOptions]="[2, 5, 10, 20]">
+  </mat-paginator>
+</div>  -->
+
+<!-- <mat-card  *ngIf="butToggleVal==='archived'"style=" background-color:lightgrey; color:black;"> -->
+
+  <!-- <br><br><br><br>
+  <div>
+    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="butToggleVal" (change)="onValChange(group.value)">
+      <mat-button-toggle value="todays" style="font-weight: bolder">Today's</mat-button-toggle>
+      <mat-button-toggle value="upcoming" style="font-weight: bolder">Upcoming</mat-button-toggle>
+      <mat-button-toggle value="archived" style="font-weight: bolder">Archived</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div><br><br><br><br><br> -->
 
 <!-- </mat-card> -->
 <!-- <p>

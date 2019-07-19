@@ -20,8 +20,6 @@ export class PostsService {
       "http://localhost:3000/api/posts/"+ whichPost
     ).pipe(map((postData)=> {
       return postData.posts.map(post => {
-        // console.log("23 : "+post.startDate+", "+this.todayDate);
-        // console.log("25 : "+new Date(post.startDate) > this.todayDate);
         return {
           title: post.title,
           content: post.content,
@@ -44,8 +42,6 @@ export class PostsService {
     )
     .pipe(map((postData)=> {
       return postData.posts.map(post => {
-        // console.log("23 : "+post.startDate+", "+this.todayDate);
-        // console.log("25 : "+new Date(post.startDate) > this.todayDate);
         return {
           title: post.title,
           content: post.content,

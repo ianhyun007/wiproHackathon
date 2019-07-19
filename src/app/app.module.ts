@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './reducers/spinner.reducer';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -21,12 +23,12 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthService } from './auth/auth.service';
 import { CreateHackathonComponent } from './navigation/create-hackathon.component';
 import { HttpClientModule } from "@angular/common/http";
+import { WelcomeModule } from './welcome/welcome.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
     LoginpopupComponent,
@@ -46,6 +48,11 @@ import { HttpClientModule } from "@angular/common/http";
     AngularFirestoreModule,
     AngularFireAuthModule,
     HttpClientModule,
+    WelcomeModule,
+    // StoreModule.forRoot({
+    //   userlogin: reducer
+    // })
+    StoreModule.forRoot({ spinner: reducer })
   ],
   providers: [AuthService, UIService],
   bootstrap: [AppComponent],

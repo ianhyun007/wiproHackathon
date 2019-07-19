@@ -5,8 +5,26 @@ const mongoose = require("mongoose");
 const Post = require("./models/post");
 const path = require("path");
 const multer = require("multer");
+var cors = require('cors');
 
 const app = express();
+
+// app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors());
+
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+//   );
+//   next();
+// });
+
 
 // var event = new Date();
 // console.log(event.toISOString());
@@ -24,9 +42,13 @@ mongoose
     console.log("Connection failed! : "+e);
   });
 
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("backend/images")));
+
+
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
@@ -52,18 +74,6 @@ const storage = multer.diskStorage({
   }
 });
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  );
-  next();
-});
 
 app.post("/api/posts", multer({ storage: storage }).single("image"), (req, res, next) => {
 // app.post("/api/posts", (req, res, next) => {
@@ -146,7 +156,6 @@ app.get("/api/posts", (req, res, next) => {
   //     content: "This is coming from the server!"
   //   }
   // ];
-
   Post.find().then(documents => {
   // Post.find( { title: "testing333" } ).then(documents => {
   // Post.find({"startDate" : { "$lte" : new Date("2019-10-01T00:00:00.000Z")}}).then(documents => {
