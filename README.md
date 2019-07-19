@@ -11,7 +11,9 @@ Following are the major features :
  - MongoDB for actual data storage
  - Various Angular Material features (including responsiveness)
    * Mat-Card, Mat-table(pagination, filtering, sorting..), Mat-Button-Toggle, Mat-Dialog...
- - Angular Animation was added to show taste of animated feature
+ - Angular Animation was added to show taste of animated 
+ - 3rd Party GreenSock Javascript library for dragging feature
+ - HTML5 video element
  - Various Angular fundamentals : Routing (nested routing), Form (template / reactive with validation),
  Services, Data bindings, RxJs Observable / operations.
 
@@ -28,3 +30,4 @@ WebRTC Chatting
  1. open up 2 browsers
  2. on first browser, click the upper right 24/7 image button
  3. on the other browser, click the same image, then you will be able to see each other's face
+ 4. PLEASE MAKE SURE THE VIDEO IS CLICKED AND DRAGGED TO BE MOVED AROUND THE SCREEN
