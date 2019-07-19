@@ -31,3 +31,7 @@ WebRTC Chatting
  2. on first browser, click the upper right 24/7 image button
  3. on the other browser, click the same image, then you will be able to see each other's face
  4. PLEASE MAKE SURE THE VIDEO IS CLICKED AND DRAGGED TO BE MOVED AROUND THE SCREEN
+
+To Login, credential of 
+  test@test.com / 123456
+can be used
