@@ -50,6 +50,7 @@ export class AuthService {
                 // this.uiService.loadingStateChanged.next(false);
                 // this.store.dispatch({ type: 'STOP_LOADING' });
                 // this.store.dispatch(new UI.StopLoading());
+                console.log("herer");
                 this.store.dispatch({ type: 'userLoggedIn' })
             })
             .catch(error => {

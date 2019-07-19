@@ -76,7 +76,6 @@ export class CreateHackathonComponent implements OnInit {
   }
 
   onAddPost() {
-    console.log("KKKK");
     if (this.form.invalid) {
       return;
     }
